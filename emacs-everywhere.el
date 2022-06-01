@@ -298,7 +298,7 @@ Never paste content when ABORT is non-nil."
                  (mapcar (lambda (arg)
                            (replace-regexp-in-string "%f" buffer-file-name arg))
                          (cdr emacs-everywhere-copy-command))))))
-    (sleep-for 0.01) ; prevents weird multi-second pause, lets clipboard info propagate
+    (sleep-for 0.1) ; prevents weird multi-second pause, lets clipboard info propagate
     (when emacs-everywhere-window-focus-command
       (let* ((window-id (emacs-everywhere-app-id emacs-everywhere-current-app))
              (window-id-str (if (numberp window-id) (number-to-string window-id) window-id)))
@@ -485,7 +485,7 @@ return windowTitle"))
       (progn
         (call-process "osascript" nil nil nil
                       "-e" "tell application \"System Events\" to keystroke \"c\" using command down")
-        (sleep-for 0.01) ; lets clipboard info propagate
+        (sleep-for 0.1) ; lets clipboard info propagate
         (yank))
     (when-let ((selection (gui-get-selection 'PRIMARY 'UTF8_STRING)))
       (gui-backend-set-selection 'PRIMARY "")
